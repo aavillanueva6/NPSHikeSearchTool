@@ -11,6 +11,18 @@
     <link type="text/css" rel="stylesheet" href="./assets/styles/style.css" />
   </head>
   <body>
+    <!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <a href="#home" class="w3-bar-item w3-button"><b>NATIONAL PARK</b> Hike Search</a>
+    <!-- Float links to the right. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="#savedHikes" class="w3-bar-item w3-button">Saved Hikes</a>
+      <a href="#gitRepo" class="w3-bar-item w3-button">Git Repository</a>
+      
+    </div>
+  </div>
+</div>
     <body>
         <header class="header">
           <div class="container">
@@ -18,53 +30,54 @@
             <!-- <div class="row align-items-end"> -->
               
           <div class="w3-container w3-padding-32" id="about">
-          <h1 class="w3-border-bottom w3-border-light-grey w3-padding-16">Welcome to the NPS HIKE SEARCH</h1>
+          <h1 class="w3-border-bottom w3-border-light-grey w3-padding-16">Welcome!</h1>
+          <div id="currentDay" class="card-body"></div>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqu.
           </p>
         </div>
         </div>
         <div class="col-12">
-      <div id="currentDay" class="card-body"></div>
+      
     <input type="search" class="form-control rounded" placeholder="Find Hikes" aria-label="Search" aria-describedby="search-addon" />
     <button type="button" class="btn btn-outline-primary">Search</button>
   </div>
 
-  <h2>Recommended Hikes: </h2>
-        <div class="w3-row-padding w3-grayscale">
-          <div class="w3-col l3 m6 w3-margin-bottom">
-            <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="John" style="width:100%">
-            <h3>Artist Point</h3>
-            <p class="w3-opacity">Mt.Baker</p>
-            <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-            <p><button class="w3-button w3-light-grey w3-block">More Info</button></p>
-          </div>
-          <div class="w3-col l3 m6 w3-margin-bottom">
-            <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="Jane" style="width:100%">
-            <h3>Myrtle Falls</h3>
-            <p class="w3-opacity">Mt.Rainier</p>
-            <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-            <p><button class="w3-button w3-light-grey w3-block">More Info</button></p>
-          </div>
-          <div class="w3-col l3 m6 w3-margin-bottom">
-            <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="Mike" style="width:100%">
-            <h3>Staircase Rapids</h3>
-            <p class="w3-opacity">Olympic National Park</p>
-            <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-            <p><button class="w3-button w3-light-grey w3-block">More Info</button></p>
-          </div>
-          <div class="w3-col l3 m6 w3-margin-bottom">
-            <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="Dan" style="width:100%">
-            <h3>Lava Canyon</h3>
-            <p class="w3-opacity">Mt.St.Helens</p>
-            <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-            <p><button class="w3-button w3-light-grey w3-block">More Info</button></p>
-          </div>
-        </div>
-      ​
+  <div class="w3-container w3-padding-32" id="projects">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Projects</h3>
+  </div>
+
+  <div class="w3-row-padding">
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <div class="w3-display-topleft w3-black w3-padding">Artist Point</div>
+        <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="House" style="width:99%">
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <div class="w3-display-topleft w3-black w3-padding">Staircase Rapids</div>
+        <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="House" style="width:99%">
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <div class="w3-display-topleft w3-black w3-padding">Myrtle Falls</div>
+        <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="House" style="width:99%">
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <div class="w3-display-topleft w3-black w3-padding">Barn House</div>
+        <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="House" style="width:99%">
+      </div>
+    </div>
+  </div>
+
         <!-- Contact Section -->
         <div class="w3-container w3-padding-32" id="contact">
           <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Contact</h3>
           <p>Lets get in touch and talk about your next project.</p>
+          <a href="#gitRepo" class="w3-bar-item w3-button">Link to GitRepo</a>
       
 </div>
     <!-- add third party scripts between these two comments -->

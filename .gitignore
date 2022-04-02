@@ -105,3 +105,6 @@ dist
 
 # Adds .DS_Store
 .DS_Store
+
+# Adds vscode config
+.vscode

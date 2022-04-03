@@ -17,9 +17,7 @@
     <a href="#home" class="w3-bar-item w3-button"><b>NATIONAL PARK</b> Hike Search</a>
     <!-- Float links to the right. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
-      <a href="#savedHikes" class="w3-bar-item w3-button">Saved Hikes</a>
-      <a href="#gitRepo" class="w3-bar-item w3-button">Git Repository</a>
-      
+      <a class="w3-bar-item w3-button">  <div id="currentDay" class="card-body"></div></a>
     </div>
   </div>
 </div>
@@ -28,24 +26,26 @@
           <div class="container">
             <!-- Use align-items utilities on flexbox containers to align to start, end, center, baseline, or stretch -->
             <!-- <div class="row align-items-end"> -->
-              
           <div class="w3-container w3-padding-32" id="about">
           <h1 class="w3-border-bottom w3-border-light-grey w3-padding-16">Welcome!</h1>
-          <div id="currentDay" class="card-body"></div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqu.
-          </p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqu.</p>
         </div>
         </div>
-        <div class="col-12">
-      
-    <input type="search" class="form-control rounded" placeholder="Find Hikes" aria-label="Search" aria-describedby="search-addon" />
-    <button type="button" class="btn btn-outline-primary">Search</button>
-  </div>
+      </header>
 
-  <div class="w3-container w3-padding-32" id="projects">
-    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Projects</h3>
+<main>
+      <div class="col-12">
+        <div class="w3-center w3-grey w3-padding-16" id="searchBtn">
+        <input type="search" class="form-control rounded" placeholder="Find Hikes" aria-label="Search" aria-describedby="search-addon" />
+        <h5><button type="button" class="btn btn-outline-primary">Search</button></h5>
+      </div>
+      </div>
+  
+</main>
+<section>
+  <div class="w3-container w3-padding-32" id="savedHikes">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Saved Hikes</h3>
   </div>
-
   <div class="w3-row-padding">
     <div class="w3-col l3 m6 w3-margin-bottom">
       <div class="w3-display-container">
@@ -58,6 +58,9 @@
         <div class="w3-display-topleft w3-black w3-padding">Staircase Rapids</div>
         <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="House" style="width:99%">
       </div>
+    </div>
+    <div class="w3-container w3-padding-32" id="savedHikes">
+      <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Top Hikes</h3>
     </div>
     <div class="w3-col l3 m6 w3-margin-bottom">
       <div class="w3-display-container">
@@ -72,12 +75,13 @@
       </div>
     </div>
   </div>
-
+</section>
         <!-- Contact Section -->
         <div class="w3-container w3-padding-32" id="contact">
           <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Contact</h3>
           <p>Lets get in touch and talk about your next project.</p>
-          <a href="#gitRepo" class="w3-bar-item w3-button">Link to GitRepo</a>
+          <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+          <a href="#gitRepo" class="w3-bar-item w3-button">Link to GitRepo</a></div>
       
 </div>
     <!-- add third party scripts between these two comments -->

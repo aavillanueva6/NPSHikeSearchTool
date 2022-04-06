@@ -20,10 +20,28 @@ function fetchThingsToDo(parkCode, start = 0) {
         return tags.includes("hiking");
       });
       console.log(confirmedHikes);
+      resetResults();
+      displaySearchText(confirmedHikes[0].relatedParks[0]);
       confirmedHikes.forEach((element) => {
         displaySearchResults(element); // call in function to display elements to DOM
       });
     });
+}
+
+/**
+ * function to clear previous results from results container.
+ */
+function resetResults() {
+  let resultsContainer = document.querySelector("#resultsCardContainer");
+  resultsContainer.textContent = "";
+  let searchSpan = document.querySelector("#searchTxt");
+  searchSpan.textContent = "";
+}
+
+function displaySearchText(element) {
+  console.log(element);
+  let searchSpan = document.querySelector("#searchTxt");
+  searchSpan.textContent = element.fullName;
 }
 
 /**
@@ -33,6 +51,7 @@ function fetchThingsToDo(parkCode, start = 0) {
  */
 function displaySearchResults(element) {
   // this is my first attempt at building out the results page.  I took the classes from the HTML that Avi made and created elements with them.  Please don't take this as a finished product.
+
   // build out elements
   let resultsContainer = document.querySelector("#resultsCardContainer");
   let resultCard = document.createElement("div");
@@ -49,7 +68,25 @@ function displaySearchResults(element) {
   shortDescr.textContent = element.shortDescription;
   let buttonContainer = document.createElement("p");
   let infoButton = document.createElement("button");
-  infoButton.classList.add("w3-button", "w3-light-grey", "w3-block");
+  infoButton.classList.add(
+    "w3-button",
+    "w3-light-grey",
+    "w3-block",
+    "moreInfoBtnNPS"
+  );
+  infoButton.textContent = "See More Info";
+  infoButton.setAttribute("data-lat", element.latitude);
+  infoButton.setAttribute("data-lon", element.longitude);
+  infoButton.setAttribute("data-url", element.url);
+
+  let saveButton = document.createElement("button");
+  saveButton.classList.add(
+    "w3-button",
+    "w3-light-grey",
+    "w3-block",
+    "saveBtnNPS"
+  );
+  saveButton.textContent = "Save Activity";
 
   // append elements to DOM
   resultsContainer.append(resultCard);
@@ -60,7 +97,7 @@ function displaySearchResults(element) {
     shortDescr,
     buttonContainer
   );
-  buttonContainer.append(infoButton);
+  buttonContainer.append(infoButton, saveButton);
 }
 
 fetchThingsToDo("mora"); // calls the function in with Mount Rainier as the searched park.  Starting with this in order to provide a simple test case on page loads.

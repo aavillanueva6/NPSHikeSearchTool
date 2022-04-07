@@ -82,6 +82,8 @@ function displaySearchResults(element) {
   infoButton.setAttribute("data-lat", element.latitude);
   infoButton.setAttribute("data-lon", element.longitude);
   infoButton.setAttribute("data-url", element.url);
+  infoButton.setAttribute("data-title", element.title);
+  infoButton.setAttribute("data-duration", element.duration);
 
   let saveButton = document.createElement("button");
   saveButton.classList.add(
@@ -104,7 +106,7 @@ function displaySearchResults(element) {
   buttonContainer.append(infoButton, saveButton);
 }
 
-fetchThingsToDo("mora"); // calls the function in with Mount Rainier as the searched park.  Starting with this in order to provide a simple test case on page loads.
+fetchThingsToDo("acad"); // calls the function in with Mount Rainier as the searched park.  Starting with this in order to provide a simple test case on page loads.
 // API  tormenta
 function fetchWeather(lat, lon) {
   fetch(
@@ -116,11 +118,6 @@ function fetchWeather(lat, lon) {
     .then(function (data) {
       console.log(data.daily);
     });
-}
-function fetchThingsToDo(parkCode, start = 0) {
-  fetch(
-    `https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=47.6&lon=-122.3&appid=a8aa38cdd3dd713a7207c383fb08def8`
-  );
 }
 
 fetchWeather(47.6, -122.3);

@@ -38,6 +38,10 @@ function resetResults() {
   searchSpan.textContent = "";
 }
 
+/**
+ * function to print the name of the national park to the DOM.
+ * @param {object} element Object containing details on the national park that was searched
+ */
 function displaySearchText(element) {
   console.log(element);
   let searchSpan = document.querySelector("#searchTxt");

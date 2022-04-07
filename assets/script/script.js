@@ -5,7 +5,29 @@ $("#currentDay").text(today.format("llll"));
 // var searchButton = document.getElementsById("searchTxt");
 // searchButton.addEventListener("click");
 
-var searchBarTwo = document.get;
+var searchTxt = queryString.split("=")[1];
+
+savedHike1.addEventListener("click", function () {
+  localStorage.getItem();
+});
+
+savedHike2.addEventListener("click", function () {
+  localStorage.getItem();
+});
+
+savedHike3.addEventListener("click", function () {
+  localStorage.getItem();
+});
+
+savedHike4.addEventListener("click", function () {
+  localStorage.getItem();
+});
+
+$("#clearFieldsBtn").click(function (event) {
+  event.preventDefault;
+  $("savedHikes").val("");
+  localStorage.clear();
+});
 
 $("savedHikes").on("click", function () {
   typing = $(this).siblings(".typing").val();
@@ -13,6 +35,7 @@ $("savedHikes").on("click", function () {
   localStorage.setItem(typing);
 });
 
+<<<<<<< HEAD
 $("searchBar").val(localStorage.getItem("searchBar"));
 
 // API  tormenta
@@ -34,3 +57,9 @@ function fetchThingsToDo(parkCode, start = 0) {
 }
 
 fetchWeather(47.6, -122.3);
+=======
+$("searchBar").val(localStorage.getItem("savedHike1"));
+$("searchBar").val(localStorage.getItem("savedHike2"));
+$("searchBar").val(localStorage.getItem("savedHike3"));
+$("searchBar").val(localStorage.getItem("savedHike4"));
+>>>>>>> 6ad5b8f8891dd457f9654ab35d9d939f51b841f7

@@ -2,8 +2,8 @@
 var today = moment();
 $("#currentDay").text(today.format("llll"));
 
-var searchButton = document.getElementsById("searchTxt");
-searchButton.addEventListener("click");
+// var searchButton = document.getElementsById("searchTxt");
+// searchButton.addEventListener("click");
 
 var searchTxt = queryString.split("=")[1];
 
@@ -35,7 +35,4 @@ $("savedHikes").on("click", function () {
   localStorage.setItem(typing);
 });
 
-$("searchBar").val(localStorage.getItem("savedHike1"));
-$("searchBar").val(localStorage.getItem("savedHike2"));
-$("searchBar").val(localStorage.getItem("savedHike3"));
-$("searchBar").val(localStorage.getItem("savedHike4"));
+$("searchBar").val(localStorage.getItem("searchBar"));

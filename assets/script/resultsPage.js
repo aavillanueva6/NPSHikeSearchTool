@@ -11,15 +11,10 @@ function fetchThingsToDo(parkCode, start = 0) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
-      // let hikesWithCoords = data.data.filter((element) => {
-      //   return element.latitude;
-      // });
       let confirmedHikes = data.data.filter((element) => {
         let { tags } = element;
         return tags.includes("hiking");
       });
-      console.log(confirmedHikes);
       resetResults();
       displaySearchText(confirmedHikes[0].relatedParks[0]);
       confirmedHikes.forEach((element) => {
@@ -43,7 +38,6 @@ function resetResults() {
  * @param {object} element Object containing details on the national park that was searched
  */
 function displaySearchText(element) {
-  console.log(element);
   let searchSpan = document.querySelector("#searchTxt");
   searchSpan.textContent = element.fullName;
 }
@@ -128,19 +122,16 @@ function displaySearchResults(element) {
   modalCardHead.textContent = element.title;
   let modalBodyString = "";
   if (element.latitude & element.longitude) {
-    console.log("lat lon");
     modalBodyString =
       modalBodyString +
       `This hike is located at ${element.latitude}, ${element.longitude}.`;
   }
   if (element.duration) {
-    console.log("duration");
     modalBodyString =
       modalBodyString +
       `<br>This hike is estimated to take ${element.duration}.`;
   }
   if (element.url) {
-    console.log("url");
     modalBodyString =
       modalBodyString +
       `<br>For more info on this activity see the NPS site at the following link:` +
@@ -155,7 +146,6 @@ function displaySearchResults(element) {
 
   //add event listener to more info button
   infoButton.addEventListener("click", function (event) {
-    console.log(event);
     let targetModal = event.target.parentElement.parentElement.lastChild;
     targetModal.classList.add("is-active");
   });
@@ -188,9 +178,6 @@ function getLocation(parkCode) {
       return response.json();
     })
     .then(function (data) {
-      console.log(parkCode);
-      console.log(data.data[0].latitude);
-      console.log(data.data[0].longitude);
       fetchWeather(data.data[0].latitude, data.data[0].longitude);
     });
 }
@@ -201,7 +188,6 @@ function getLocation(parkCode) {
 function getParams() {
   let searchParamsArr = document.location.search.split("&");
   let parkCode = searchParamsArr[0].split("=").pop();
-  console.log(parkCode);
   getLocation(parkCode);
   fetchThingsToDo(parkCode);
 }

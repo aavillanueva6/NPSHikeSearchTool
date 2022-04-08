@@ -79,11 +79,6 @@ function displaySearchResults(element) {
     "moreInfoBtnNPS"
   );
   infoButton.textContent = "See More Info";
-  infoButton.setAttribute("data-lat", element.latitude);
-  infoButton.setAttribute("data-lon", element.longitude);
-  infoButton.setAttribute("data-url", element.url);
-  infoButton.setAttribute("data-title", element.title);
-  infoButton.setAttribute("data-duration", element.duration);
 
   let saveButton = document.createElement("button");
   saveButton.classList.add(
@@ -93,6 +88,13 @@ function displaySearchResults(element) {
     "saveBtnNPS"
   );
   saveButton.textContent = "Save Activity";
+  saveButton.setAttribute("data-lat", element.latitude);
+  saveButton.setAttribute("data-lon", element.longitude);
+  saveButton.setAttribute("data-url", element.url);
+  saveButton.setAttribute("data-title", element.title);
+  saveButton.setAttribute("data-duration", element.duration);
+  saveButton.setAttribute("data-imgSrc", element.images[0].url);
+  saveButton.setAttribute("data-imgAlt", element.images[0].title);
 
   // append elements to DOM
   resultsContainer.append(resultCard);
@@ -104,6 +106,65 @@ function displaySearchResults(element) {
     buttonContainer
   );
   buttonContainer.append(infoButton, saveButton);
+
+  // build Modal
+  let modalContainer = document.querySelector("#modalsContainer");
+  let modal = document.createElement("div");
+  let modalBackgroud = document.createElement("div");
+  let modalCard = document.createElement("div");
+  let modalCardHead = document.createElement("header");
+  let modalCardP = document.createElement("p");
+  let modalCardCloseButton = document.createElement("button");
+  let modalCardBody = document.createElement("section");
+  modal.classList.add("modal");
+  modalBackgroud.classList.add("modal-background");
+  modalCard.classList.add("modal-card");
+  modalCardHead.classList.add("modal-card-head");
+  modalCardP.classList.add("modal-card-title");
+  modalCardCloseButton.classList.add("delete");
+  modalCardCloseButton.setAttribute("aria-label", "close");
+  modalCardBody.classList.add("modal-card-body");
+
+  modalCardHead.textContent = element.title;
+  let modalBodyString = "";
+  if (element.latitude & element.longitude) {
+    console.log("lat lon");
+    modalBodyString =
+      modalBodyString +
+      `This hike is located at ${element.latitude}, ${element.longitude}.`;
+  }
+  if (element.duration) {
+    console.log("duration");
+    modalBodyString =
+      modalBodyString +
+      `<br>This hike is estimated to take ${element.duration}.`;
+  }
+  if (element.url) {
+    console.log("url");
+    modalBodyString =
+      modalBodyString +
+      `<br>For more info on this activity see the NPS site at the following link:` +
+      `<br><a target="_blank" rel="noopener noreferrer" href="${element.url}">${element.url}</a>`;
+  }
+  modalCardBody.innerHTML = modalBodyString;
+  //append Modal to DOM
+  resultCard.append(modal);
+  modal.append(modalBackgroud, modalCard);
+  modalCard.append(modalCardHead, modalCardBody);
+  modalCardHead.append(modalCardP, modalCardCloseButton);
+
+  //add event listener to more info button
+  infoButton.addEventListener("click", function (event) {
+    console.log(event);
+    let targetModal = event.target.parentElement.parentElement.lastChild;
+    targetModal.classList.add("is-active");
+  });
+
+  // add event listener to the close modal button
+  modalCardCloseButton.addEventListener("click", function (event) {
+    let targetModal = event.target.parentElement.parentElement.parentElement;
+    targetModal.classList.remove("is-active");
+  });
 }
 
 // API  tormenta

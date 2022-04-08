@@ -11,8 +11,10 @@ function fetchThingsToDo(parkCode, start = 0) {
       return response.json();
     })
     .then(function (data) {
+      console.log(data);
       let confirmedHikes = data.data.filter((element) => {
         let { tags } = element;
+        console.log(tags);
         return tags.includes("hiking");
       });
       resetResults();
@@ -111,6 +113,7 @@ function displaySearchResults(element) {
   let modalCardCloseButton = document.createElement("button");
   let modalCardBody = document.createElement("section");
   modal.classList.add("modal");
+  modal.setAttribute("id", `modal-${element.id}`);
   modalBackgroud.classList.add("modal-background");
   modalCard.classList.add("modal-card");
   modalCardHead.classList.add("modal-card-head");
@@ -124,12 +127,13 @@ function displaySearchResults(element) {
   if (element.latitude & element.longitude) {
     modalBodyString =
       modalBodyString +
-      `This hike is located at ${element.latitude}, ${element.longitude}.`;
+      `This hike is located at <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/@${element.latitude},${element.longitude},15z">(${element.latitude}, ${element.longitude})</a> .<br>`;
   }
+
   if (element.duration) {
     modalBodyString =
       modalBodyString +
-      `<br>This hike is estimated to take ${element.duration}.`;
+      `<br>This hike is estimated to take ${element.duration}.<br>`;
   }
   if (element.url) {
     modalBodyString =
@@ -139,20 +143,20 @@ function displaySearchResults(element) {
   }
   modalCardBody.innerHTML = modalBodyString;
   //append Modal to DOM
-  resultCard.append(modal);
+  modalContainer.append(modal);
   modal.append(modalBackgroud, modalCard);
   modalCard.append(modalCardHead, modalCardBody);
   modalCardHead.append(modalCardP, modalCardCloseButton);
 
   //add event listener to more info button
   infoButton.addEventListener("click", function (event) {
-    let targetModal = event.target.parentElement.parentElement.lastChild;
+    let targetModal = document.querySelector(`#modal-${element.id}`);
     targetModal.classList.add("is-active");
   });
 
   // add event listener to the close modal button
   modalCardCloseButton.addEventListener("click", function (event) {
-    let targetModal = event.target.parentElement.parentElement.parentElement;
+    let targetModal = document.querySelector(`#modal-${element.id}`);
     targetModal.classList.remove("is-active");
   });
 }
@@ -170,6 +174,10 @@ function fetchWeather(lat, lon) {
     });
 }
 
+/**
+ * function that gets the lat and lon based on the NP that was searched.
+ * @param {string} parkCode code to identify the searched NP. Is pulled from the URL in the getParams function
+ */
 function getLocation(parkCode) {
   fetch(
     `https://developer.nps.gov/api/v1/parks?api_key=ZnVoqox7ej7CCeeL6tFZ8QqrBBrqctfS84deCO52&parkCode=${parkCode}`

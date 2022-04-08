@@ -12,10 +12,10 @@ function fetchThingsToDo(parkCode, start = 0) {
     })
     .then(function (data) {
       console.log(data);
-      let hikesWithCoords = data.data.filter((element) => {
-        return element.latitude;
-      });
-      let confirmedHikes = hikesWithCoords.filter((element) => {
+      // let hikesWithCoords = data.data.filter((element) => {
+      //   return element.latitude;
+      // });
+      let confirmedHikes = data.data.filter((element) => {
         let { tags } = element;
         return tags.includes("hiking");
       });
@@ -106,7 +106,6 @@ function displaySearchResults(element) {
   buttonContainer.append(infoButton, saveButton);
 }
 
-fetchThingsToDo("acad"); // calls the function in with Mount Rainier as the searched park.  Starting with this in order to provide a simple test case on page loads.
 // API  tormenta
 function fetchWeather(lat, lon) {
   fetch(
@@ -120,4 +119,31 @@ function fetchWeather(lat, lon) {
     });
 }
 
-fetchWeather(47.6, -122.3);
+function getLocation(parkCode) {
+  fetch(
+    `https://developer.nps.gov/api/v1/parks?api_key=ZnVoqox7ej7CCeeL6tFZ8QqrBBrqctfS84deCO52&parkCode=${parkCode}`
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(parkCode);
+      console.log(data.data[0].latitude);
+      console.log(data.data[0].longitude);
+      fetchWeather(data.data[0].latitude, data.data[0].longitude);
+    });
+}
+
+/**
+ * function to get the search parameters from the URL
+ */
+function getParams() {
+  let searchParamsArr = document.location.search.split("&");
+  let parkCode = searchParamsArr[0].split("=").pop();
+  console.log(parkCode);
+  getLocation(parkCode);
+  fetchThingsToDo(parkCode);
+}
+
+// call the getParams function on page load
+getParams();

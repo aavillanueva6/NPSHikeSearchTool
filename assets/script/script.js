@@ -4,12 +4,14 @@ $("#currentDay").text(today.format("llll"));
 
 var searchButton = document.getElementById("searchBtn");
 searchButton.addEventListener("click", function (event) {
-  console.log(event.target);
   const buttonEl = event.target;
-  console.log(buttonEl);
   const textInput = buttonEl.previousElementSibling.value;
-  console.log(textInput);
-
+  let natParkSearchCode = natParkListObj[textInput];
+  if (natParkSearchCode) {
+    console.log(natParkSearchCode);
+    let apiCallString = `./resultspage.html?parkCode=${natParkSearchCode}`;
+    location.assign(apiCallString);
+  }
   // var searchTxt = queryString.split("=")[1];
 });
 
@@ -47,7 +49,6 @@ searchButton.addEventListener("click", function (event) {
 
 $(function () {
   var natParkList = [
-    "Acadia NP",
     "Arches NP",
     "Badlands NP",
     "Big Bend NP",
@@ -115,9 +116,7 @@ $(function () {
     source: natParkList,
   });
 });
-
 const natParkListObj = {
-  "Acadia NP": "acan",
   "Arches NP": "arch",
   "Badlands NP": "badl",
   "Big Bend NP": "bibe",
@@ -181,5 +180,3 @@ const natParkListObj = {
   "Yosemite NP": "yose",
   "Zion NP": "zion",
 };
-console.log(natParkListObj);
-console.log(natParkListObj["White Sands NP"]);

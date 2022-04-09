@@ -57,34 +57,51 @@
     <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">
       Saved Hikes</h3>
   
-  <button class="w3-button w3-white w3-border w3-round-large">Clear Saved Hikes</button>
+  <button class="w3-button w3-white w3-border w3-round-large" id="clearFieldsBtn">Clear Saved Hikes</button>
 </div>
-  <div class="w3-row-padding">
+  <div id="savedHikesContainer" class="w3-row-padding">
     <div class="w3-col l3 m6 w3-margin-bottom">
       <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding">Artist Point</div>
+        <div class="w3-display-topleft w3-black w3-padding" id="savedHike1">Artist Point</div>
         <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="House" style="width:99%">
       </div>
     </div>
     <div class="w3-col l3 m6 w3-margin-bottom">
       <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding">Staircase Rapids</div>
+        <div class="w3-display-topleft w3-black w3-padding" id="savedHike2">Staircase Rapids</div>
         <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="House" style="width:99%">
       </div>
     </div>
-    <div class="w3-container w3-padding-32" id="savedHikes">
+  </div>
+  <div id="topHikesContainer" class="w3-row-padding">
+    <div class="w3-container w3-padding-32">
       <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Top Hikes</h3>
     </div>
     <div class="w3-col l3 m6 w3-margin-bottom">
       <div class="w3-display-container">
         <div class="w3-display-topleft w3-black w3-padding">Myrtle Falls</div>
-        <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="House" style="width:99%">
+        <img src="" alt="House" style="width:99%">
       </div>
     </div>
     <div class="w3-col l3 m6 w3-margin-bottom">
       <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding">Barn House</div>
-        <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="House" style="width:99%">
+        <div class="w3-display-topleft w3-black w3-padding">Hike to Delicate Arch</div>
+        <img src="https://www.nps.gov/common/uploads/cropped_image/236D5B1D-05BC-272E-CFBDA984A498C797.jpg" alt="Picture of Delicate Arch" width="100%">
+       <p>Hike the the world's most famous natural stone arch. This trail climbs 480 feet (146 m) up a steep slickrock slope. The trail has no shade and some exposure to heights. It is very popular, especially at sunrise and sunset.</p> 
+       <p>
+        <button class="w3-button w3-light-grey w3-block moreInfoBtnNPS" id="delicateArchInfo">See More Info</button>
+        <div class="modal" id="delicateArchModal">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">Hike to Delicate Arch
+              <p class="modal-card-title"></p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body"><br>This hike is estimated to take 2-3 Hours.<br><br>For more info on this activity see the NPS site at the following link:<br><a target="_blank" rel="noopener noreferrer" href="https://www.nps.gov/thingstodo/arch-hike-delicate-arch.htm">https://www.nps.gov/thingstodo/arch-hike-delicate-arch.htm</a>
+            </section>
+          </div>
+        </div>
+       </p>
       </div>
     </div>
   </div>

@@ -1,3 +1,8 @@
+if (JSON.parse(localStorage.getItem("saveData")) == null) {
+  var saveDataArray = [];
+} else {
+  var saveDataArray = JSON.parse(localStorage.getItem("saveData"));
+}
 /**
  * function that takes in string for parkCode and number for start.  Start defaults to 0 and would be used to display additional pages of results (not in original project scope, but could possibly be added without too much difficulty.)
  * @param {string} parkCode code for the national park.  Need to pull these from the NPS site.  Might need to build out an object or have some other way to get this value from a typed input from the user
@@ -83,7 +88,7 @@ function displaySearchResults(element) {
     "w3-block",
     "saveBtnNPS"
   );
-  saveButton.textContent = "Save Activity";
+  saveButton.textContent = "Save";
   saveButton.setAttribute("data-lat", element.latitude);
   saveButton.setAttribute("data-lon", element.longitude);
   saveButton.setAttribute("data-url", element.url);
@@ -153,6 +158,23 @@ function displaySearchResults(element) {
     let targetModal = document.querySelector(`#modal-${element.id}`);
     targetModal.classList.add("is-active");
   });
+  // add eventlistenr to save button
+  saveButton.addEventListener("click", function (event) {
+    console.log(event.target);
+    var saveData = {
+      lat: event.target.getAttribute("data-lat"),
+      lon: event.target.getAttribute("data-lon"),
+      url: event.target.getAttribute("data-url"),
+      title: event.target.getAttribute("data-title"),
+      duration: event.target.getAttribute("data-duration"),
+      imgSrc: event.target.getAttribute("data-imgSrc"),
+      imgAlt: event.target.getAttribute("data-imgAlt"),
+    };
+    console.log(saveData);
+    saveDataArray.unshift(saveData);
+    JSON.stringify(saveDataArray);
+    localStorage.setItem("saveData", JSON.stringify(saveDataArray));
+  });
 
   // add event listener to the close modal button
   modalCardCloseButton.addEventListener("click", function (event) {
@@ -164,14 +186,58 @@ function displaySearchResults(element) {
 // API  tormenta
 function fetchWeather(lat, lon) {
   fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=a8aa38cdd3dd713a7207c383fb08def8`
+    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=a8aa38cdd3dd713a7207c383fb08def8&units=imperial`
   )
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
       console.log(data.daily);
+      let forecastContainer = document.querySelector("#forecastContainer");
+      forecastContainer.textContent = "";
+      for (let i = 0; i < 1; i++) {
+        displayWeather(data.daily[i]);
+      }
     });
+}
+
+function displayWeather(day) {
+  console.log(day);
+  let forecastContainer = document.querySelector("#forecastContainer");
+  let forecastP = document.createElement("p");
+  forecastP.classList.add("w3-large", "w3-serif");
+  forecastP.innerHTML =
+    '<i class="fa fa-quote-right w3-xxlarge w3-text-red"></i><br>';
+  let forecastNav = document.createElement("nav");
+  let forecastUl = document.createElement("ul");
+  // let forecastIconLi = document.createElement("li");
+  // forecastIconLi.textContent = "icon";
+  let forecastIconDiv = document.createElement("div");
+  forecastIconDiv.classList.add("box");
+  forecastIconDiv.innerHTML = `<img src="https://openweathermap.org/img/wn/${day.weather[0].icon}.png">`;
+
+  // let forecastTempLi = document.createElement("li");
+  // forecastTempLi.textContent = "temp";
+  let forecastTempDiv = document.createElement("div");
+  forecastTempDiv.classList.add("box");
+  forecastTempDiv.innerHTML = `Temp:<br>${day.temp.day} °F`;
+
+  // let forecastDescLi = document.createElement("li");
+  // forecastDescLi.textContent = "Description";
+
+  let forecastDescDiv = document.createElement("div");
+  forecastDescDiv.classList.add("box");
+  forecastDescDiv.innerHTML = `Description:<br>${day.weather[0].description}`;
+
+  forecastContainer.append(forecastP, forecastNav);
+  forecastNav.append(forecastUl);
+  forecastUl.append(
+    forecastIconDiv,
+
+    forecastTempDiv,
+
+    forecastDescDiv
+  );
 }
 
 /**

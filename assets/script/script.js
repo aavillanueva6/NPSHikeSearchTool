@@ -2,7 +2,6 @@
 var today = moment();
 $("#currentDay").text(today.format("llll"));
 
-<<<<<<< HEAD
 var searchButton = document.getElementById("searchTxt");
 searchButton.addEventListener("click", function (event) {});
 
@@ -28,32 +27,6 @@ savedHike2.addEventListener("click", function (event) {
 //savedHike4.addEventListener("click", function (event) {
 // localStorage.getItem();
 //});
-=======
-var searchButton = document.getElementById("searchBtn");
-searchButton.addEventListener("click", function (event) {
-  const buttonEl = event.target;
-  const textInput = buttonEl.previousElementSibling.value;
-  let natParkSearchCode = natParkListObj[textInput];
-  if (natParkSearchCode) {
-    console.log(natParkSearchCode);
-    let apiCallString = `./resultspage.html?parkCode=${natParkSearchCode}`;
-    location.assign(apiCallString);
-  }
-  // var searchTxt = queryString.split("=")[1];
-});
-
-// savedHike1.addEventListener("click", function () {
-//   localStorage.getItem();
-// });
-
-// savedHike2.addEventListener("click", function () {
-//   localStorage.getItem();
-// });
-
-// savedHike3.addEventListener("click", function () {
-//   localStorage.getItem();
-// });
->>>>>>> develop
 
 // savedHike4.addEventListener("click", function () {
 //   localStorage.getItem();
@@ -65,12 +38,6 @@ searchButton.addEventListener("click", function (event) {
 //   localStorage.clear();
 // });
 
-<<<<<<< HEAD
-$("savedHike1").val(localStorage.getItem("savedHike1"));
-$("savedHike2").val(localStorage.getItem("savedHike2"));
-$("savedHike3").val(localStorage.getItem("savedHike3"));
-$("savedHike4").val(localStorage.getItem("savedHike4"));
-=======
 // $("savedHikes").on("click", function () {
 //   typing = $(this).siblings(".typing").val();
 //   console.log(typing);
@@ -217,4 +184,3 @@ const natParkListObj = {
   "Yosemite NP": "yose",
   "Zion NP": "zion",
 };
->>>>>>> develop

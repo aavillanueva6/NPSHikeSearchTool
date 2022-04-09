@@ -57,22 +57,9 @@
     <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">
       Saved Hikes</h3>
   
-  <button class="w3-button w3-white w3-border w3-round-large">Clear Saved Hikes</button>
+  <button class="w3-button w3-white w3-border w3-round-large" id="clearFieldsBtn">Clear Saved Hikes</button>
 </div>
-  <div id="savedHikesContainer" class="w3-row-padding">
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding" id="savedHike1">Artist Point</div>
-        <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="House" style="width:99%">
-      </div>
-    </div>
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding" id="savedHike2">Staircase Rapids</div>
-        <img src="https://placehold.jp/30/dd6699/ffffff/300x150.png?text=placeholder+image" alt="House" style="width:99%">
-      </div>
-    </div>
-  </div>
+  <div id="savedHikesContainer" class="w3-row-padding"></div>
   <div id="topHikesContainer" class="w3-row-padding">
     <div class="w3-container w3-padding-32">
       <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Top Hikes</h3>
@@ -83,13 +70,13 @@
         <img src="https://www.nps.gov/common/uploads/cropped_image/FFBA7BDC-0359-7C70-AE946BC387C3FEB9.jpg" alt="Granite Canyon" width="100%">
        <p>Hike through forests and meadows in Granite Canyon on this moderate-strenuous hike.</p> 
        <p>
-        <button class="w3-button w3-light-grey w3-block moreInfoBtnNPS" id="delicateArchInfo">See More Info</button>
+        <button class="w3-button w3-light-grey w3-block moreInfoBtnNPS" id="graniteCanyonInfo">See More Info</button>
         <div class="modal" id="graniteCanyonModal">
           <div class="modal-background"></div>
           <div class="modal-card">
             <header class="modal-card-head">Granite Canyon
               <p class="modal-card-title"></p>
-              <button class="delete" aria-label="close"></button>
+              <button class="delete" aria-label="close" id="graniteCanyonModalClose"></button>
             </header>
             <section class="modal-card-body">
               <br>This hike is estimated to take 6-8 Hours.<br><br>For more info on this activity see the NPS site at the following link:<br><a target="_blank" rel="noopener noreferrer" href="https://www.nps.gov/thingstodo/granite-canyon.htm">https://www.nps.gov/thingstodo/granite-canyon.htm</a>
@@ -111,7 +98,7 @@
           <div class="modal-card">
             <header class="modal-card-head">Hike to Delicate Arch
               <p class="modal-card-title"></p>
-              <button class="delete" aria-label="close"></button>
+              <button class="delete" aria-label="close" id="delicateArchModalClose"></button>
             </header>
             <section class="modal-card-body">
               <br>This hike is estimated to take 2-3 Hours.<br><br>For more info on this activity see the NPS site at the following link:<br><a target="_blank" rel="noopener noreferrer" href="https://www.nps.gov/thingstodo/arch-hike-delicate-arch.htm">https://www.nps.gov/thingstodo/arch-hike-delicate-arch.htm</a>
@@ -128,7 +115,7 @@
           <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Contact</h3>
           <p>Lets get in touch and talk about your next project.</p>
           <div class="w3-bar w3-white w3-wide w3-padding w3-card">
-          <a href="#gitRepo" class="w3-bar-item w3-button">Link to GitRepo</a></div>
+          <a href="https://github.com/aavillanueva6/NPSHikeSearchTool" class="w3-bar-item w3-button" target="_blank" rel="noopener noreferrer">Link to GitRepo</a></div>
       
 </div>
     <!-- add third party scripts between these two comments -->

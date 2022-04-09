@@ -171,7 +171,50 @@ function fetchWeather(lat, lon) {
     })
     .then(function (data) {
       console.log(data.daily);
+      let forecastContainer = document.querySelector("#forecastContainer");
+      forecastContainer.textContent = "";
+      for (let i = 0; i < 1; i++) {
+        displayWeather(data.daily[i]);
+      }
     });
+}
+
+function displayWeather(day) {
+  console.log(day);
+  let forecastContainer = document.querySelector("#forecastContainer");
+  let forecastP = document.createElement("p");
+  forecastP.classList.add("w3-large", "w3-serif");
+  forecastP.innerHTML =
+    '<i class="fa fa-quote-right w3-xxlarge w3-text-red"></i><br>';
+  let forecastNav = document.createElement("nav");
+  let forecastUl = document.createElement("ul");
+  let forecastIconLi = document.createElement("li");
+  forecastIconLi.textContent = "icon";
+  let forecastIconDiv = document.createElement("div");
+  forecastIconDiv.classList.add("box");
+  forecastIconDiv.innerHTML = `<img src="https://openweathermap.org/img/wn/${day.weather[0].icon}.png">`;
+
+  let forecastTempLi = document.createElement("li");
+  forecastTempLi.textContent = "temp";
+  let forecastTempDiv = document.createElement("div");
+  forecastTempDiv.classList.add("box");
+  forecastTempDiv.textContent = day.temp.day;
+
+  let forecastDescLi = document.createElement("li");
+  forecastDescLi.textContent = "Description";
+  let forecastDescDiv = document.createElement("div");
+  forecastDescDiv.classList.add("box");
+
+  forecastContainer.append(forecastP, forecastNav);
+  forecastNav.append(forecastUl);
+  forecastUl.append(
+    forecastIconLi,
+    forecastIconDiv,
+    forecastTempLi,
+    forecastTempDiv,
+    forecastDescLi,
+    forecastDescDiv
+  );
 }
 
 /**

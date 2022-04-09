@@ -173,7 +173,7 @@ function displaySearchResults(element) {
     console.log(saveData);
     saveDataArray.unshift(saveData);
     JSON.stringify(saveDataArray);
-    localStorage.setItem(saveData, JSON.stringify(saveDataArray));
+    localStorage.setItem("saveData", JSON.stringify(saveDataArray));
   });
 
   // add event listener to the close modal button

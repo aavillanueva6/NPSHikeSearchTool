@@ -2,35 +2,18 @@
 var today = moment();
 $("#currentDay").text(today.format("llll"));
 
-var searchButton = document.getElementById("searchTxt");
-searchButton.addEventListener("click", function (event) {});
-
-//var searchTxt = queryString.split("=")[1];
-var savedHike1 = document.querySelector("#savedHike1");
-var savedHike2 = document.querySelector("#savedHike2");
-//var savedHike3 = document.querySelector("#savedHike3");
-//var savedHike4 = document.querySelector("#savedHike4");
-
-savedHike1.addEventListener("click", function (event) {
-  localStorage.getItem();
-  console.log(event);
+var searchButton = document.getElementById("searchBtn");
+searchButton.addEventListener("click", function (event) {
+  const buttonEl = event.target;
+  const textInput = buttonEl.previousElementSibling.value;
+  let natParkSearchCode = natParkListObj[textInput];
+  if (natParkSearchCode) {
+    console.log(natParkSearchCode);
+    let apiCallString = `./resultspage.html?parkCode=${natParkSearchCode}`;
+    location.assign(apiCallString);
+  }
+  // var searchTxt = queryString.split("=")[1];
 });
-
-savedHike2.addEventListener("click", function (event) {
-  localStorage.getItem();
-});
-
-// savedHike3.addEventListener("click", function (event) {
-//localStorage.getItem();
-//});
-
-//savedHike4.addEventListener("click", function (event) {
-// localStorage.getItem();
-//});
-
-// savedHike4.addEventListener("click", function () {
-//   localStorage.getItem();
-// });
 
 // $("#clearFieldsBtn").click(function (event) {
 //   event.preventDefault;
@@ -189,20 +172,20 @@ function displaySavedHikes() {
   console.log("i ran the display function");
   let savedHikesArray = JSON.parse(localStorage.getItem("saveData"));
   console.log(savedHikesArray);
-  for (let i = 0; i < 2; i++) {
-    buildSavedHikeCard(/*savedHikesArray[i]*/);
+  let savedHikesContainer = document.querySelector("#savedHikesContainer");
+  savedHikesContainer.textContent = "";
+  for (let i = 0; i < 2 && i < savedHikesArray.length; i++) {
+    buildSavedHikeCard(savedHikesArray[i]);
   }
 }
-displaySavedHikes();
 
 function buildSavedHikeCard(element) {
-  console.log(element);
   let savedHikesContainer = document.querySelector("#savedHikesContainer");
   let resultCard = document.createElement("div");
   resultCard.classList.add("w3-col", "13", "m6", "w3-margin-bottom");
   let resultImg = document.createElement("img");
-  resultImg.setAttribute("src", element.imageUrl);
-  resultImg.setAttribute("alt", element.imageAlt);
+  resultImg.setAttribute("src", element.imgSrc);
+  resultImg.setAttribute("alt", element.imgAlt);
   resultImg.setAttribute("width", "100%");
   let hikeName = document.createElement("h3");
   hikeName.textContent = element.title;
@@ -230,3 +213,5 @@ function buildSavedHikeCard(element) {
   );
   buttonContainer.append(infoButton);
 }
+
+displaySavedHikes();

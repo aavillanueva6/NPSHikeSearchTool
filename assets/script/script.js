@@ -183,3 +183,49 @@ const natParkListObj = {
   "Yosemite NP": "yose",
   "Zion NP": "zion",
 };
+
+function displaySavedHikes() {
+  console.log("i ran the display function");
+  let savedHikesArray = JSON.parse(localStorage.getItem("saveData"));
+  console.log(savedHikesArray);
+  for (let i = 0; i < 2; i++) {
+    buildSavedHikeCard(/*savedHikesArray[i]*/);
+  }
+}
+displaySavedHikes();
+
+function buildSavedHikeCard(element) {
+  console.log(element);
+  let savedHikesContainer = document.querySelector("#savedHikesContainer");
+  let resultCard = document.createElement("div");
+  resultCard.classList.add("w3-col", "13", "m6", "w3-margin-bottom");
+  let resultImg = document.createElement("img");
+  resultImg.setAttribute("src", element.imageUrl);
+  resultImg.setAttribute("alt", element.imageAlt);
+  resultImg.setAttribute("width", "100%");
+  let hikeName = document.createElement("h3");
+  hikeName.textContent = element.title;
+  let natParkName = document.createElement("p");
+  natParkName.classList.add("w3-opacity");
+  let shortDescr = document.createElement("p");
+  shortDescr.textContent = element.shortDescription;
+  let buttonContainer = document.createElement("p");
+  let infoButton = document.createElement("button");
+  infoButton.classList.add(
+    "w3-button",
+    "w3-light-grey",
+    "w3-block",
+    "moreInfoBtnNPS"
+  );
+  infoButton.textContent = "See More Info";
+  //append elements to DOM
+  savedHikesContainer.append(resultCard);
+  resultCard.append(
+    resultImg,
+    hikeName,
+    natParkName,
+    shortDescr,
+    buttonContainer
+  );
+  buttonContainer.append(infoButton);
+}

@@ -83,7 +83,7 @@ function displaySearchResults(element) {
     "w3-block",
     "saveBtnNPS"
   );
-  saveButton.textContent = "Save Activity";
+  saveButton.textContent = "Save";
   saveButton.setAttribute("data-lat", element.latitude);
   saveButton.setAttribute("data-lon", element.longitude);
   saveButton.setAttribute("data-url", element.url);

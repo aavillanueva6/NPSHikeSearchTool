@@ -2,30 +2,31 @@
 var today = moment();
 $("#currentDay").text(today.format("llll"));
 
-var searchButton = document.getElementById("searchBtn");
-searchButton.addEventListener("click", function (event) {
-  const buttonEl = event.target;
-  const textInput = buttonEl.previousElementSibling.value;
-  let natParkSearchCode = natParkListObj[textInput];
-  if (natParkSearchCode) {
-    console.log(natParkSearchCode);
-    let apiCallString = `./resultspage.html?parkCode=${natParkSearchCode}`;
-    location.assign(apiCallString);
-  }
-  // var searchTxt = queryString.split("=")[1];
+var searchButton = document.getElementById("searchTxt");
+searchButton.addEventListener("click", function (event) {});
+
+//var searchTxt = queryString.split("=")[1];
+var savedHike1 = document.querySelector("#savedHike1");
+var savedHike2 = document.querySelector("#savedHike2");
+//var savedHike3 = document.querySelector("#savedHike3");
+//var savedHike4 = document.querySelector("#savedHike4");
+
+savedHike1.addEventListener("click", function (event) {
+  localStorage.getItem();
+  console.log(event);
 });
 
-// savedHike1.addEventListener("click", function () {
-//   localStorage.getItem();
-// });
+savedHike2.addEventListener("click", function (event) {
+  localStorage.getItem();
+});
 
-// savedHike2.addEventListener("click", function () {
-//   localStorage.getItem();
-// });
+// savedHike3.addEventListener("click", function (event) {
+//localStorage.getItem();
+//});
 
-// savedHike3.addEventListener("click", function () {
-//   localStorage.getItem();
-// });
+//savedHike4.addEventListener("click", function (event) {
+// localStorage.getItem();
+//});
 
 // savedHike4.addEventListener("click", function () {
 //   localStorage.getItem();

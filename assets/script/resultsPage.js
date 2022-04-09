@@ -1,3 +1,8 @@
+if (JSON.parse(localStorage.getItem("saveData")) == null) {
+  var saveDataArray = [];
+} else {
+  var saveDataArray = JSON.parse(localStorage.getItem("saveData"));
+}
 /**
  * function that takes in string for parkCode and number for start.  Start defaults to 0 and would be used to display additional pages of results (not in original project scope, but could possibly be added without too much difficulty.)
  * @param {string} parkCode code for the national park.  Need to pull these from the NPS site.  Might need to build out an object or have some other way to get this value from a typed input from the user
@@ -152,6 +157,23 @@ function displaySearchResults(element) {
   infoButton.addEventListener("click", function (event) {
     let targetModal = document.querySelector(`#modal-${element.id}`);
     targetModal.classList.add("is-active");
+  });
+  // add eventlistenr to save button
+  saveButton.addEventListener("click", function (event) {
+    console.log(event.target);
+    var saveData = {
+      lat: event.target.getAttribute("data-lat"),
+      lon: event.target.getAttribute("data-lon"),
+      url: event.target.getAttribute("data-url"),
+      title: event.target.getAttribute("data-title"),
+      duration: event.target.getAttribute("data-duration"),
+      imgSrc: event.target.getAttribute("data-imgSrc"),
+      imgAlt: event.target.getAttribute("data-imgAlt"),
+    };
+    console.log(saveData);
+    saveDataArray.unshift(saveData);
+    JSON.stringify(saveDataArray);
+    localStorage.setItem("saveData", JSON.stringify(saveDataArray));
   });
 
   // add event listener to the close modal button

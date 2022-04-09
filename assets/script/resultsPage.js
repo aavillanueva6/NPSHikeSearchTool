@@ -12,14 +12,11 @@ function fetchThingsToDo(parkCode, start = 0) {
     })
     .then(function (data) {
       console.log(data);
-      let hikesWithCoords = data.data.filter((element) => {
-        return element.latitude;
-      });
-      let confirmedHikes = hikesWithCoords.filter((element) => {
+      let confirmedHikes = data.data.filter((element) => {
         let { tags } = element;
+        console.log(tags);
         return tags.includes("hiking");
       });
-      console.log(confirmedHikes);
       resetResults();
       displaySearchText(confirmedHikes[0].relatedParks[0]);
       confirmedHikes.forEach((element) => {
@@ -43,7 +40,6 @@ function resetResults() {
  * @param {object} element Object containing details on the national park that was searched
  */
 function displaySearchText(element) {
-  console.log(element);
   let searchSpan = document.querySelector("#searchTxt");
   searchSpan.textContent = element.fullName;
 }
@@ -79,9 +75,6 @@ function displaySearchResults(element) {
     "moreInfoBtnNPS"
   );
   infoButton.textContent = "See More Info";
-  infoButton.setAttribute("data-lat", element.latitude);
-  infoButton.setAttribute("data-lon", element.longitude);
-  infoButton.setAttribute("data-url", element.url);
 
   let saveButton = document.createElement("button");
   saveButton.classList.add(
@@ -91,6 +84,13 @@ function displaySearchResults(element) {
     "saveBtnNPS"
   );
   saveButton.textContent = "Save Activity";
+  saveButton.setAttribute("data-lat", element.latitude);
+  saveButton.setAttribute("data-lon", element.longitude);
+  saveButton.setAttribute("data-url", element.url);
+  saveButton.setAttribute("data-title", element.title);
+  saveButton.setAttribute("data-duration", element.duration);
+  saveButton.setAttribute("data-imgSrc", element.images[0].url);
+  saveButton.setAttribute("data-imgAlt", element.images[0].title);
 
   // append elements to DOM
   resultsContainer.append(resultCard);
@@ -102,9 +102,65 @@ function displaySearchResults(element) {
     buttonContainer
   );
   buttonContainer.append(infoButton, saveButton);
+
+  // build Modal
+  let modalContainer = document.querySelector("#modalsContainer");
+  let modal = document.createElement("div");
+  let modalBackgroud = document.createElement("div");
+  let modalCard = document.createElement("div");
+  let modalCardHead = document.createElement("header");
+  let modalCardP = document.createElement("p");
+  let modalCardCloseButton = document.createElement("button");
+  let modalCardBody = document.createElement("section");
+  modal.classList.add("modal");
+  modal.setAttribute("id", `modal-${element.id}`);
+  modalBackgroud.classList.add("modal-background");
+  modalCard.classList.add("modal-card");
+  modalCardHead.classList.add("modal-card-head");
+  modalCardP.classList.add("modal-card-title");
+  modalCardCloseButton.classList.add("delete");
+  modalCardCloseButton.setAttribute("aria-label", "close");
+  modalCardBody.classList.add("modal-card-body");
+
+  modalCardHead.textContent = element.title;
+  let modalBodyString = "";
+  if (element.latitude & element.longitude) {
+    modalBodyString =
+      modalBodyString +
+      `This hike is located at <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/@${element.latitude},${element.longitude},15z">(${element.latitude}, ${element.longitude})</a> .<br>`;
+  }
+
+  if (element.duration) {
+    modalBodyString =
+      modalBodyString +
+      `<br>This hike is estimated to take ${element.duration}.<br>`;
+  }
+  if (element.url) {
+    modalBodyString =
+      modalBodyString +
+      `<br>For more info on this activity see the NPS site at the following link:` +
+      `<br><a target="_blank" rel="noopener noreferrer" href="${element.url}">${element.url}</a>`;
+  }
+  modalCardBody.innerHTML = modalBodyString;
+  //append Modal to DOM
+  modalContainer.append(modal);
+  modal.append(modalBackgroud, modalCard);
+  modalCard.append(modalCardHead, modalCardBody);
+  modalCardHead.append(modalCardP, modalCardCloseButton);
+
+  //add event listener to more info button
+  infoButton.addEventListener("click", function (event) {
+    let targetModal = document.querySelector(`#modal-${element.id}`);
+    targetModal.classList.add("is-active");
+  });
+
+  // add event listener to the close modal button
+  modalCardCloseButton.addEventListener("click", function (event) {
+    let targetModal = document.querySelector(`#modal-${element.id}`);
+    targetModal.classList.remove("is-active");
+  });
 }
 
-fetchThingsToDo("mora"); // calls the function in with Mount Rainier as the searched park.  Starting with this in order to provide a simple test case on page loads.
 // API  tormenta
 function fetchWeather(lat, lon) {
   fetch(
@@ -117,5 +173,35 @@ function fetchWeather(lat, lon) {
       console.log(data.daily);
     });
 }
+<<<<<<< HEAD
+=======
 
-fetchWeather(47.6, -122.3);
+/**
+ * function that gets the lat and lon based on the NP that was searched.
+ * @param {string} parkCode code to identify the searched NP. Is pulled from the URL in the getParams function
+ */
+function getLocation(parkCode) {
+  fetch(
+    `https://developer.nps.gov/api/v1/parks?api_key=ZnVoqox7ej7CCeeL6tFZ8QqrBBrqctfS84deCO52&parkCode=${parkCode}`
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      fetchWeather(data.data[0].latitude, data.data[0].longitude);
+    });
+}
+>>>>>>> develop
+
+/**
+ * function to get the search parameters from the URL
+ */
+function getParams() {
+  let searchParamsArr = document.location.search.split("&");
+  let parkCode = searchParamsArr[0].split("=").pop();
+  getLocation(parkCode);
+  fetchThingsToDo(parkCode);
+}
+
+// call the getParams function on page load
+getParams();

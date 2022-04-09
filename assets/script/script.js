@@ -12,14 +12,13 @@ searchButton.addEventListener("click", function (event) {
     let apiCallString = `./resultspage.html?parkCode=${natParkSearchCode}`;
     location.assign(apiCallString);
   }
-  // var searchTxt = queryString.split("=")[1];
 });
 
-// $("#clearFieldsBtn").click(function (event) {
-//   event.preventDefault;
-//   $("savedHikes").val("");
-//   localStorage.clear();
-// });
+$("#clearFieldsBtn").click(function (event) {
+  event.preventDefault;
+  $("savedHikes").val("");
+  localStorage.clear();
+});
 
 // $("savedHikes").on("click", function () {
 //   typing = $(this).siblings(".typing").val();

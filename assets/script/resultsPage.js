@@ -164,7 +164,7 @@ function displaySearchResults(element) {
 // API  tormenta
 function fetchWeather(lat, lon) {
   fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=a8aa38cdd3dd713a7207c383fb08def8`
+    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=a8aa38cdd3dd713a7207c383fb08def8&units=imperial`
   )
     .then(function (response) {
       return response.json();
@@ -188,31 +188,32 @@ function displayWeather(day) {
     '<i class="fa fa-quote-right w3-xxlarge w3-text-red"></i><br>';
   let forecastNav = document.createElement("nav");
   let forecastUl = document.createElement("ul");
-  let forecastIconLi = document.createElement("li");
-  forecastIconLi.textContent = "icon";
+  // let forecastIconLi = document.createElement("li");
+  // forecastIconLi.textContent = "icon";
   let forecastIconDiv = document.createElement("div");
   forecastIconDiv.classList.add("box");
   forecastIconDiv.innerHTML = `<img src="https://openweathermap.org/img/wn/${day.weather[0].icon}.png">`;
 
-  let forecastTempLi = document.createElement("li");
-  forecastTempLi.textContent = "temp";
+  // let forecastTempLi = document.createElement("li");
+  // forecastTempLi.textContent = "temp";
   let forecastTempDiv = document.createElement("div");
   forecastTempDiv.classList.add("box");
-  forecastTempDiv.textContent = day.temp.day;
+  forecastTempDiv.innerHTML = `Temp:<br>${day.temp.day} °F`;
 
-  let forecastDescLi = document.createElement("li");
-  forecastDescLi.textContent = "Description";
+  // let forecastDescLi = document.createElement("li");
+  // forecastDescLi.textContent = "Description";
+
   let forecastDescDiv = document.createElement("div");
   forecastDescDiv.classList.add("box");
+  forecastDescDiv.innerHTML = `Description:<br>${day.weather[0].description}`;
 
   forecastContainer.append(forecastP, forecastNav);
   forecastNav.append(forecastUl);
   forecastUl.append(
-    forecastIconLi,
     forecastIconDiv,
-    forecastTempLi,
+
     forecastTempDiv,
-    forecastDescLi,
+
     forecastDescDiv
   );
 }

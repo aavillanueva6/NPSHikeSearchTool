@@ -117,10 +117,5 @@ function fetchWeather(lat, lon) {
       console.log(data.daily);
     });
 }
-function fetchThingsToDo(parkCode, start = 0) {
-  fetch(
-    `https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=47.6&lon=-122.3&appid=a8aa38cdd3dd713a7207c383fb08def8`
-  );
-}
 
 fetchWeather(47.6, -122.3);

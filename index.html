@@ -12,7 +12,7 @@
       href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
     />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link type="text/css" rel="stylesheet" href="./assets/styles/style.css" />
   </head>
   <body>
@@ -57,7 +57,7 @@
     <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">
       Saved Hikes</h3>
   
-  <button class="w3-button w3-white w3-border w3-round-large" id="clearFieldsBtn">Clear Saved Hikes</button>
+  <button class="w3-button w3-white w3-border w3-round-large">Clear Saved Hikes</button>
 </div>
   <div id="savedHikesContainer" class="w3-row-padding">
     <div class="w3-col l3 m6 w3-margin-bottom">
@@ -79,8 +79,24 @@
     </div>
     <div class="w3-col l3 m6 w3-margin-bottom">
       <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding">Myrtle Falls</div>
-        <img src="" alt="House" style="width:99%">
+        <div class="w3-display-topleft w3-black w3-padding">Granite Canyon</div>
+        <img src="https://www.nps.gov/common/uploads/cropped_image/FFBA7BDC-0359-7C70-AE946BC387C3FEB9.jpg" alt="Granite Canyon" width="100%">
+       <p>Hike through forests and meadows in Granite Canyon on this moderate-strenuous hike.</p> 
+       <p>
+        <button class="w3-button w3-light-grey w3-block moreInfoBtnNPS" id="delicateArchInfo">See More Info</button>
+        <div class="modal" id="graniteCanyonModal">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">Granite Canyon
+              <p class="modal-card-title"></p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+              <br>This hike is estimated to take 6-8 Hours.<br><br>For more info on this activity see the NPS site at the following link:<br><a target="_blank" rel="noopener noreferrer" href="https://www.nps.gov/thingstodo/granite-canyon.htm">https://www.nps.gov/thingstodo/granite-canyon.htm</a>
+            </section>
+          </div>
+        </div>
+       </p>
       </div>
     </div>
     <div class="w3-col l3 m6 w3-margin-bottom">
@@ -97,7 +113,8 @@
               <p class="modal-card-title"></p>
               <button class="delete" aria-label="close"></button>
             </header>
-            <section class="modal-card-body"><br>This hike is estimated to take 2-3 Hours.<br><br>For more info on this activity see the NPS site at the following link:<br><a target="_blank" rel="noopener noreferrer" href="https://www.nps.gov/thingstodo/arch-hike-delicate-arch.htm">https://www.nps.gov/thingstodo/arch-hike-delicate-arch.htm</a>
+            <section class="modal-card-body">
+              <br>This hike is estimated to take 2-3 Hours.<br><br>For more info on this activity see the NPS site at the following link:<br><a target="_blank" rel="noopener noreferrer" href="https://www.nps.gov/thingstodo/arch-hike-delicate-arch.htm">https://www.nps.gov/thingstodo/arch-hike-delicate-arch.htm</a>
             </section>
           </div>
         </div>

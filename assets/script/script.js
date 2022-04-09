@@ -17,6 +17,8 @@ searchButton.addEventListener("click", function (event) {
 $("#clearFieldsBtn").click(function (event) {
   event.preventDefault;
   $("savedHikes").val("");
+  let savedHikesContainer = document.querySelector("#savedHikesContainer");
+  savedHikesContainer.textContent = "";
   localStorage.clear();
 });
 
@@ -174,11 +176,11 @@ function displaySavedHikes() {
   let savedHikesContainer = document.querySelector("#savedHikesContainer");
   savedHikesContainer.textContent = "";
   for (let i = 0; i < 2 && i < savedHikesArray.length; i++) {
-    buildSavedHikeCard(savedHikesArray[i]);
+    buildSavedHikeCard(savedHikesArray[i], i);
   }
 }
 
-function buildSavedHikeCard(element) {
+function buildSavedHikeCard(element, num) {
   let savedHikesContainer = document.querySelector("#savedHikesContainer");
   let resultCard = document.createElement("div");
   resultCard.classList.add("w3-col", "13", "m6", "w3-margin-bottom");
@@ -201,6 +203,7 @@ function buildSavedHikeCard(element) {
     "moreInfoBtnNPS"
   );
   infoButton.textContent = "See More Info";
+
   //append elements to DOM
   savedHikesContainer.append(resultCard);
   resultCard.append(
@@ -211,6 +214,88 @@ function buildSavedHikeCard(element) {
     buttonContainer
   );
   buttonContainer.append(infoButton);
+  // build Modal
+
+  let modal = document.createElement("div");
+  let modalBackgroud = document.createElement("div");
+  let modalCard = document.createElement("div");
+  let modalCardHead = document.createElement("header");
+  let modalCardP = document.createElement("p");
+  let modalCardCloseButton = document.createElement("button");
+  let modalCardBody = document.createElement("section");
+  modal.classList.add("modal");
+  modal.setAttribute("id", `modal-${num}`);
+  modalBackgroud.classList.add("modal-background");
+  modalCard.classList.add("modal-card");
+  modalCardHead.classList.add("modal-card-head");
+  modalCardP.classList.add("modal-card-title");
+  modalCardCloseButton.classList.add("delete");
+  modalCardCloseButton.setAttribute("aria-label", "close");
+  modalCardBody.classList.add("modal-card-body");
+
+  modalCardHead.textContent = element.title;
+  let modalBodyString = "";
+  if (element.latitude & element.longitude) {
+    modalBodyString =
+      modalBodyString +
+      `This hike is located at <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/@${element.latitude},${element.longitude},15z">(${element.latitude}, ${element.longitude})</a> .<br>`;
+  }
+
+  if (element.duration) {
+    modalBodyString =
+      modalBodyString +
+      `<br>This hike is estimated to take ${element.duration}.<br>`;
+  }
+  if (element.url) {
+    modalBodyString =
+      modalBodyString +
+      `<br>For more info on this activity see the NPS site at the following link:` +
+      `<br><a target="_blank" rel="noopener noreferrer" href="${element.url}">${element.url}</a>`;
+  }
+  modalCardBody.innerHTML = modalBodyString;
+  //append Modal to DOM
+  savedHikesContainer.append(modal);
+  modal.append(modalBackgroud, modalCard);
+  modalCard.append(modalCardHead, modalCardBody);
+  modalCardHead.append(modalCardP, modalCardCloseButton);
+
+  //add event listener to more info button
+  infoButton.addEventListener("click", function (event) {
+    let targetModal = document.querySelector(`#modal-${num}`);
+    targetModal.classList.add("is-active");
+  });
+  // add event listener to the close modal button
+  modalCardCloseButton.addEventListener("click", function (event) {
+    let targetModal = document.querySelector(`#modal-${num}`);
+    targetModal.classList.remove("is-active");
+  });
 }
 
-displaySavedHikes();
+// add click listeners for top hikes info and modal close buttons
+let delicateArchInfoButton = document.querySelector("#delicateArchInfo");
+delicateArchInfoButton.addEventListener("click", function (event) {
+  let targetModal = document.querySelector("#delicateArchModal");
+  targetModal.classList.add("is-active");
+});
+let graniteCanyonInfoButton = document.querySelector("#graniteCanyonInfo");
+graniteCanyonInfoButton.addEventListener("click", function (event) {
+  let targetModal = document.querySelector("#graniteCanyonModal");
+  targetModal.classList.add("is-active");
+});
+let delicateArchModalClose = document.querySelector("#delicateArchModalClose");
+delicateArchModalClose.addEventListener("click", function () {
+  let targetModal = document.querySelector("#delicateArchModal");
+  targetModal.classList.remove("is-active");
+});
+let graniteCanyonModalClose = document.querySelector(
+  "#graniteCanyonModalClose"
+);
+graniteCanyonModalClose.addEventListener("click", function () {
+  let targetModal = document.querySelector("#graniteCanyonModal");
+  targetModal.classList.remove("is-active");
+});
+
+if (JSON.parse(localStorage.getItem("saveData")) == null) {
+} else {
+  displaySavedHikes();
+}

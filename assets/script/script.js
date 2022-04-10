@@ -223,7 +223,7 @@ function buildSavedHikeCard(element, num) {
   let modalCardP = document.createElement("p");
   let modalCardCloseButton = document.createElement("button");
   let modalCardBody = document.createElement("section");
-  modal.classList.add("modal");
+  modal.classList.add("w3-modal");
   modal.setAttribute("id", `modal-${num}`);
   modalBackgroud.classList.add("modal-background");
   modalCard.classList.add("modal-card");

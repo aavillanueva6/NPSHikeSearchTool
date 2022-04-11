@@ -183,7 +183,7 @@ function displaySavedHikes() {
 function buildSavedHikeCard(element, num) {
   let savedHikesContainer = document.querySelector("#savedHikesContainer");
   let resultCard = document.createElement("div");
-  resultCard.classList.add("w3-col", "13", "m6", "w3-margin-bottom");
+  resultCard.classList.add("w3-col", "13", "m6", "w3-margin-bottom", "w3-grayscale");
   let resultImg = document.createElement("img");
   resultImg.setAttribute("src", element.imgSrc);
   resultImg.setAttribute("alt", element.imgAlt);

@@ -111,23 +111,22 @@ function displaySearchResults(element) {
   // build Modal
   let modalContainer = document.querySelector("#modalsContainer");
   let modal = document.createElement("div");
-  let modalBackgroud = document.createElement("div");
   let modalCard = document.createElement("div");
   let modalCardHead = document.createElement("header");
-  let modalCardP = document.createElement("p");
-  let modalCardCloseButton = document.createElement("button");
+  let modalCardHeadText = document.createElement("h2");
+  let modalCardCloseButton = document.createElement("span");
   let modalCardBody = document.createElement("section");
-  modal.classList.add("modal");
+  modal.classList.add("w3-modal");
   modal.setAttribute("id", `modal-${element.id}`);
-  modalBackgroud.classList.add("modal-background");
-  modalCard.classList.add("modal-card");
-  modalCardHead.classList.add("modal-card-head");
-  modalCardP.classList.add("modal-card-title");
-  modalCardCloseButton.classList.add("delete");
+  modalCard.classList.add("w3-modal-content", "w3-card-4");
+  modalCardHead.classList.add("w3-container", "w3-light-gray");
+  modalCardHeadText.classList.add("w3-margin-right");
+  modalCardCloseButton.classList.add("w3-button", "w3-display-topright");
   modalCardCloseButton.setAttribute("aria-label", "close");
-  modalCardBody.classList.add("modal-card-body");
+  modalCardBody.classList.add("w3-container");
 
-  modalCardHead.textContent = element.title;
+  modalCardCloseButton.textContent = "x";
+  modalCardHeadText.textContent = element.title;
   let modalBodyString = "";
   if (element.latitude & element.longitude) {
     modalBodyString =
@@ -149,14 +148,14 @@ function displaySearchResults(element) {
   modalCardBody.innerHTML = modalBodyString;
   //append Modal to DOM
   modalContainer.append(modal);
-  modal.append(modalBackgroud, modalCard);
+  modal.append(modalCard);
   modalCard.append(modalCardHead, modalCardBody);
-  modalCardHead.append(modalCardP, modalCardCloseButton);
+  modalCardHead.append(modalCardHeadText, modalCardCloseButton);
 
   //add event listener to more info button
   infoButton.addEventListener("click", function (event) {
     let targetModal = document.querySelector(`#modal-${element.id}`);
-    targetModal.classList.add("is-active");
+    targetModal.style.display = "block";
   });
   // add eventlistenr to save button
   saveButton.addEventListener("click", function (event) {
@@ -179,7 +178,7 @@ function displaySearchResults(element) {
   // add event listener to the close modal button
   modalCardCloseButton.addEventListener("click", function (event) {
     let targetModal = document.querySelector(`#modal-${element.id}`);
-    targetModal.classList.remove("is-active");
+    targetModal.style.display = "none";
   });
 }
 

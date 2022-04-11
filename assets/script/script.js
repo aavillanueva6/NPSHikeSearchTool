@@ -217,23 +217,21 @@ function buildSavedHikeCard(element, num) {
   // build Modal
 
   let modal = document.createElement("div");
-  let modalBackgroud = document.createElement("div");
   let modalCard = document.createElement("div");
   let modalCardHead = document.createElement("header");
-  let modalCardP = document.createElement("p");
-  let modalCardCloseButton = document.createElement("button");
+  let modalCardHeadText = document.createElement("h2");
+  let modalCardCloseButton = document.createElement("span");
   let modalCardBody = document.createElement("section");
-  modal.classList.add("modal");
+  modal.classList.add("w3-modal");
   modal.setAttribute("id", `modal-${num}`);
-  modalBackgroud.classList.add("modal-background");
-  modalCard.classList.add("modal-card");
-  modalCardHead.classList.add("modal-card-head");
-  modalCardP.classList.add("modal-card-title");
-  modalCardCloseButton.classList.add("delete");
+  modalCard.classList.add("w3-modal-content", "w3-card-4");
+  modalCardHead.classList.add("w3-container", "w3-blue-gray");
+  modalCardCloseButton.classList.add("w3-button", "w3-display-topright");
   modalCardCloseButton.setAttribute("aria-label", "close");
-  modalCardBody.classList.add("modal-card-body");
+  modalCardBody.classList.add("w3-container");
 
-  modalCardHead.textContent = element.title;
+  modalCardCloseButton.textContent = "x";
+  modalCardHeadText.textContent = element.title;
   let modalBodyString = "";
   if (element.latitude & element.longitude) {
     modalBodyString =
@@ -255,19 +253,19 @@ function buildSavedHikeCard(element, num) {
   modalCardBody.innerHTML = modalBodyString;
   //append Modal to DOM
   savedHikesContainer.append(modal);
-  modal.append(modalBackgroud, modalCard);
+  modal.append(modalCard);
   modalCard.append(modalCardHead, modalCardBody);
-  modalCardHead.append(modalCardP, modalCardCloseButton);
+  modalCardHead.append(modalCardHeadText, modalCardCloseButton);
 
   //add event listener to more info button
   infoButton.addEventListener("click", function (event) {
     let targetModal = document.querySelector(`#modal-${num}`);
-    targetModal.classList.add("is-active");
+    targetModal.style.display = "block";
   });
   // add event listener to the close modal button
   modalCardCloseButton.addEventListener("click", function (event) {
     let targetModal = document.querySelector(`#modal-${num}`);
-    targetModal.classList.remove("is-active");
+    targetModal.style.display = "none";
   });
 }
 
@@ -275,24 +273,24 @@ function buildSavedHikeCard(element, num) {
 let delicateArchInfoButton = document.querySelector("#delicateArchInfo");
 delicateArchInfoButton.addEventListener("click", function (event) {
   let targetModal = document.querySelector("#delicateArchModal");
-  targetModal.classList.add("is-active");
+  targetModal.style.display = "block";
 });
 let graniteCanyonInfoButton = document.querySelector("#graniteCanyonInfo");
 graniteCanyonInfoButton.addEventListener("click", function (event) {
   let targetModal = document.querySelector("#graniteCanyonModal");
-  targetModal.classList.add("is-active");
+  targetModal.style.display = "block";
 });
 let delicateArchModalClose = document.querySelector("#delicateArchModalClose");
 delicateArchModalClose.addEventListener("click", function () {
   let targetModal = document.querySelector("#delicateArchModal");
-  targetModal.classList.remove("is-active");
+  targetModal.style.display = "none";
 });
 let graniteCanyonModalClose = document.querySelector(
   "#graniteCanyonModalClose"
 );
 graniteCanyonModalClose.addEventListener("click", function () {
   let targetModal = document.querySelector("#graniteCanyonModal");
-  targetModal.classList.remove("is-active");
+  targetModal.style.display = "none";
 });
 
 if (JSON.parse(localStorage.getItem("saveData")) == null) {

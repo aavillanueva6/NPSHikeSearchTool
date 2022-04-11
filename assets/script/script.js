@@ -225,7 +225,7 @@ function buildSavedHikeCard(element, num) {
   modal.classList.add("w3-modal");
   modal.setAttribute("id", `modal-${num}`);
   modalCard.classList.add("w3-modal-content", "w3-card-4");
-  modalCardHead.classList.add("w3-container", "w3-blue-gray");
+  modalCardHead.classList.add("w3-container", "w3-light-gray");
   modalCardCloseButton.classList.add("w3-button", "w3-display-topright");
   modalCardCloseButton.setAttribute("aria-label", "close");
   modalCardBody.classList.add("w3-container");

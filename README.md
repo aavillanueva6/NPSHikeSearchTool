@@ -66,6 +66,8 @@ No known bugs
 - Additional data that the team considered implementing in the project includes:
   - Map the user from their current location to the trailhead
   - Provide estimated calorie burn for the hike
-  - Provide the user with a list of nearby campgrounds for the selected hike
+  - Provide the user with a list of nearby campgrounds for the selected hike and their open/closed status
+  - Provide the user with live webcam footage of the Park
+  - Provide the user with an option to see weather forecast for next 5 days
 
 ---

@@ -16,7 +16,6 @@ function fetchThingsToDo(parkCode, start = 0) {
       return response.json();
     })
     .then(function (data) {
-
       let confirmedHikes = data.data.filter((element) => {
         let { tags } = element;
 
@@ -156,7 +155,6 @@ function displaySearchResults(element) {
   });
   // add eventlistenr to save button
   saveButton.addEventListener("click", function (event) {
-
     var saveData = {
       lat: event.target.getAttribute("data-lat"),
       lon: event.target.getAttribute("data-lon"),
@@ -182,8 +180,8 @@ function displaySearchResults(element) {
 // API  tormenta
 /**
  * this functions gets the lat & lon and runs the API for that location to get the forecast
- * @param {number} lat 
- * @param {number} lon 
+ * @param {number} lat
+ * @param {number} lon
  */
 function fetchWeather(lat, lon) {
   fetch(
@@ -193,7 +191,6 @@ function fetchWeather(lat, lon) {
       return response.json();
     })
     .then(function (data) {
-
       let forecastContainer = document.querySelector("#forecastContainer");
       forecastContainer.textContent = "";
       for (let i = 0; i < 1; i++) {
@@ -203,10 +200,9 @@ function fetchWeather(lat, lon) {
 }
 /**
  * this function takes the results from the Weather API and displays it to the DOM.
- * @param {object} day 
+ * @param {object} day
  */
 function displayWeather(day) {
-
   let forecastContainer = document.querySelector("#forecastContainer");
   let forecastP = document.createElement("p");
   forecastP.classList.add("w3-large", "w3-serif");
@@ -229,13 +225,7 @@ function displayWeather(day) {
 
   forecastContainer.append(forecastP, forecastNav);
   forecastNav.append(forecastUl);
-  forecastUl.append(
-    forecastIconDiv,
-
-    forecastTempDiv,
-
-    forecastDescDiv
-  );
+  forecastUl.append(forecastIconDiv, forecastDescDiv, forecastTempDiv);
 }
 
 /**

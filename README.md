@@ -71,3 +71,9 @@ No known bugs
   - Provide the user with an option to see weather forecast for next 5 days
 
 ---
+
+## Presentation
+
+https://docs.google.com/presentation/d/1LZ8-hv8dxUOYg3geLFvLBHBB34OznakTU3KPB-Uj0CM/edit
+
+---

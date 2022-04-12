@@ -2,18 +2,20 @@
 var today = moment();
 $("#currentDay").text(today.format("llll"));
 
+// goesto the result page, converts the input from search button to a code for the API Search
 var searchButton = document.getElementById("searchBtn");
 searchButton.addEventListener("click", function (event) {
   const buttonEl = event.target;
   const textInput = buttonEl.previousElementSibling.value;
   let natParkSearchCode = natParkListObj[textInput];
   if (natParkSearchCode) {
-    console.log(natParkSearchCode);
+
     let apiCallString = `./resultspage.html?parkCode=${natParkSearchCode}`;
     location.assign(apiCallString);
   }
 });
 
+//clears the local storage of the saved hike
 $("#clearFieldsBtn").click(function (event) {
   event.preventDefault;
   $("savedHikes").val("");
@@ -22,16 +24,8 @@ $("#clearFieldsBtn").click(function (event) {
   localStorage.clear();
 });
 
-// $("savedHikes").on("click", function () {
-//   typing = $(this).siblings(".typing").val();
-//   console.log(typing);
-//   localStorage.setItem(typing);
-// });
-
-// $("searchBar").val(localStorage.getItem("searchBar"));
 
 // Autocomplete search form widget
-
 $(function () {
   //commented out parks that did not return any results.
   var natParkList = [
@@ -103,6 +97,7 @@ $(function () {
     source: natParkList,
   });
 });
+//object that contains the code for each parks
 const natParkListObj = {
   "Acadia NP": "acan",
   "Arches NP": "arch",
@@ -168,18 +163,23 @@ const natParkListObj = {
   "Yosemite NP": "yose",
   "Zion NP": "zion",
 };
-
+/**
+ * this function displays the first 2 hikesthat are saved on to the local storage
+ */
 function displaySavedHikes() {
-  console.log("i ran the display function");
+
   let savedHikesArray = JSON.parse(localStorage.getItem("saveData"));
-  console.log(savedHikesArray);
   let savedHikesContainer = document.querySelector("#savedHikesContainer");
   savedHikesContainer.textContent = "";
   for (let i = 0; i < 2 && i < savedHikesArray.length; i++) {
     buildSavedHikeCard(savedHikesArray[i], i);
   }
 }
-
+/**
+ * this function building and appending the saved hiked conatiner
+ * @param {object} element 
+ * @param {number} num 
+ */
 function buildSavedHikeCard(element, num) {
   let savedHikesContainer = document.querySelector("#savedHikesContainer");
   let resultCard = document.createElement("div");
@@ -292,7 +292,7 @@ graniteCanyonModalClose.addEventListener("click", function () {
   let targetModal = document.querySelector("#graniteCanyonModal");
   targetModal.style.display = "none";
 });
-
+//if there is stored hikes on the local storage, display those. If not- dont do anything
 if (JSON.parse(localStorage.getItem("saveData")) == null) {
 } else {
   displaySavedHikes();

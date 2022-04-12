@@ -16,10 +16,10 @@ function fetchThingsToDo(parkCode, start = 0) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+
       let confirmedHikes = data.data.filter((element) => {
         let { tags } = element;
-        console.log(tags);
+
         return tags.includes("hiking");
       });
       resetResults();
@@ -51,12 +51,9 @@ function displaySearchText(element) {
 
 /**
  * Function takes object from NPS API call and prints results to the DOM by building out cards with relevant information for each one.
- * ** TODO: add a way to save relevant data from the object into the card.  I think a data-attribute can be used for this, but I haven't put too much thought into what data we want to capture at this point.
  * @param {object} element object with activity data from the NPS API call
  */
 function displaySearchResults(element) {
-  // this is my first attempt at building out the results page.  I took the classes from the HTML that Avi made and created elements with them.  Please don't take this as a finished product.
-
   // build out elements
   let resultsContainer = document.querySelector("#resultsCardContainer");
   let resultCard = document.createElement("div");
@@ -159,7 +156,7 @@ function displaySearchResults(element) {
   });
   // add eventlistenr to save button
   saveButton.addEventListener("click", function (event) {
-    console.log(event.target);
+
     var saveData = {
       lat: event.target.getAttribute("data-lat"),
       lon: event.target.getAttribute("data-lon"),
@@ -169,7 +166,7 @@ function displaySearchResults(element) {
       imgSrc: event.target.getAttribute("data-imgSrc"),
       imgAlt: event.target.getAttribute("data-imgAlt"),
     };
-    console.log(saveData);
+
     saveDataArray.unshift(saveData);
     JSON.stringify(saveDataArray);
     localStorage.setItem("saveData", JSON.stringify(saveDataArray));
@@ -183,6 +180,11 @@ function displaySearchResults(element) {
 }
 
 // API  tormenta
+/**
+ * this functions gets the lat & lon and runs the API for that location to get the forecast
+ * @param {number} lat 
+ * @param {number} lon 
+ */
 function fetchWeather(lat, lon) {
   fetch(
     `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=a8aa38cdd3dd713a7207c383fb08def8&units=imperial`
@@ -191,7 +193,7 @@ function fetchWeather(lat, lon) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data.daily);
+
       let forecastContainer = document.querySelector("#forecastContainer");
       forecastContainer.textContent = "";
       for (let i = 0; i < 1; i++) {
@@ -199,9 +201,12 @@ function fetchWeather(lat, lon) {
       }
     });
 }
-
+/**
+ * this function takes the results from the Weather API and displays it to the DOM.
+ * @param {object} day 
+ */
 function displayWeather(day) {
-  console.log(day);
+
   let forecastContainer = document.querySelector("#forecastContainer");
   let forecastP = document.createElement("p");
   forecastP.classList.add("w3-large", "w3-serif");
@@ -209,20 +214,14 @@ function displayWeather(day) {
     '<i class="fa fa-quote-right w3-xxlarge w3-text-red"></i><br>';
   let forecastNav = document.createElement("nav");
   let forecastUl = document.createElement("ul");
-  // let forecastIconLi = document.createElement("li");
-  // forecastIconLi.textContent = "icon";
+
   let forecastIconDiv = document.createElement("div");
   forecastIconDiv.classList.add("box");
   forecastIconDiv.innerHTML = `<img src="https://openweathermap.org/img/wn/${day.weather[0].icon}.png">`;
 
-  // let forecastTempLi = document.createElement("li");
-  // forecastTempLi.textContent = "temp";
   let forecastTempDiv = document.createElement("div");
   forecastTempDiv.classList.add("box");
   forecastTempDiv.innerHTML = `Temp:<br>${day.temp.day} °F`;
-
-  // let forecastDescLi = document.createElement("li");
-  // forecastDescLi.textContent = "Description";
 
   let forecastDescDiv = document.createElement("div");
   forecastDescDiv.classList.add("box");
